@@ -13,6 +13,9 @@ public final class ErrorMessage {
     public static final String EMPTY_COUNT = "경주 횟수가 비어있습니다.";
     public static final String INVALID_RACE_COUNT = "경주 횟수는 1~100 사이여야 합니다.";
 
+    // Cars 관련
+    public static final String EMPTY_CAR_LIST = "자동차 목록이 비어있습니다.";
+
     // 인스턴스 생성 방지
     private ErrorMessage() {
     }
