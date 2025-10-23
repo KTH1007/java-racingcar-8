@@ -6,6 +6,7 @@ import racingcar.domain.exception.ErrorMessage;
 public class Car {
     private static final String POSITION_SYMBOL = "-";
     private static final int MAX_NAME_LENGTH = 5;
+    private static final String NAME_POSITION_SEPARATOR = " : ";
 
     private final String name;
     private int position;
@@ -23,7 +24,7 @@ public class Car {
     }
 
     public String createProgressDisplay() {
-        return name + " : " + POSITION_SYMBOL.repeat(position);
+        return name + NAME_POSITION_SEPARATOR + POSITION_SYMBOL.repeat(position);
     }
 
     public String createNameDisplay() {
