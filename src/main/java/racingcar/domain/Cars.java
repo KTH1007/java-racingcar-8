@@ -27,6 +27,10 @@ public class Cars {
         cars.forEach(car -> car.move(randomNumberGenerator));
     }
 
+    public List<Car> getCars() {
+        return new ArrayList<>(cars);
+    }
+
     private void validateNotEmpty(List<Car> cars) {
         if (cars == null || cars.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.EMPTY_CAR_LIST);
