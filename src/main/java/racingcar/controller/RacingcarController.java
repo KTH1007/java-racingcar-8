@@ -21,6 +21,7 @@ public class RacingcarController {
 
         outputView.printRaceCountInputMessage();
         String countInput = inputView.readRaceCount();
+        outputView.printSpace();
 
         racingcarService.startRace(nameInput, countInput);
     }
