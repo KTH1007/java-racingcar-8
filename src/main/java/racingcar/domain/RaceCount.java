@@ -23,7 +23,7 @@ public class RaceCount {
         try {
             parsedCount = Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_POSITIVE_NUMBER);
+            throw new IllegalArgumentException(String.format(ErrorMessage.NOT_POSITIVE_NUMBER, input.trim()));
         }
 
         validateRange(parsedCount);
@@ -38,7 +38,7 @@ public class RaceCount {
 
     private static void validateRange(int racingCount) {
         if (racingCount < MIN_COUNT || racingCount > MAX_COUNT) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_RACE_COUNT);
+            throw new IllegalArgumentException(String.format(ErrorMessage.INVALID_RACE_COUNT, racingCount));
         }
     }
 }
