@@ -13,13 +13,17 @@ public class Cars {
     }
 
     public List<Car> findWinners() {
-        int maxPosition = cars.stream()
-                .mapToInt(Car::getPosition)
-                .max()
-                .orElse(0);
+        Car winner = cars.getFirst();
+        for (Car car : cars) {
+            if (car.hasHigherPositionThan(winner)) {
+                winner = car;
+            }
+        }
+
+        final Car finalWinner = winner;
 
         return cars.stream()
-                .filter(car -> car.getPosition() == maxPosition)
+                .filter(car -> car.hasSamePositionAs(finalWinner))
                 .toList();
     }
 
@@ -27,8 +31,16 @@ public class Cars {
         cars.forEach(car -> car.move(randomNumberGenerator));
     }
 
-    public List<Car> getCars() {
-        return new ArrayList<>(cars);
+    public List<String> getProgressDisplays() {
+        return cars.stream()
+                .map(Car::createProgressDisplay)
+                .toList();
+    }
+
+    public List<String> getWinnerNames() {
+        return findWinners().stream()
+                .map(Car::createNameDisplay)
+                .toList();
     }
 
     private void validateNotEmpty(List<Car> cars) {

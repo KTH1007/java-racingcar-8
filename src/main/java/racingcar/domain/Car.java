@@ -4,7 +4,7 @@ package racingcar.domain;
 import racingcar.domain.exception.ErrorMessage;
 
 public class Car {
-
+    private static final String POSITION_SYMBOL = "-";
     private static final int MAX_NAME_LENGTH = 5;
 
     private final String name;
@@ -22,12 +22,20 @@ public class Car {
         }
     }
 
-    public String getName() {
+    public String createProgressDisplay() {
+        return name + " : " + POSITION_SYMBOL.repeat(position);
+    }
+
+    public String createNameDisplay() {
         return name;
     }
 
-    public int getPosition() {
-        return position;
+    public boolean hasHigherPositionThan(Car other) {
+        return this.position > other.position;
+    }
+
+    public boolean hasSamePositionAs(Car other) {
+        return this.position == other.position;
     }
 
     private void validateName(String name) {

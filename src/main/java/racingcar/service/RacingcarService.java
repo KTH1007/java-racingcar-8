@@ -27,13 +27,13 @@ public class RacingcarService {
         RaceCount raceCount = new RaceCount(countInput);
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
-        for (int i = 0; i < raceCount.getCount(); i++) {
+        int round = 0;
+        while (raceCount.hasMoreRound(round++)) {
             cars.moveAll(randomNumberGenerator);
             outputView.printRaceProgress(cars);
             outputView.printSpace();
         }
 
-        List<Car> winners = cars.findWinners();
-        outputView.printWinners(winners);
+        outputView.printWinners(cars);
     }
 }

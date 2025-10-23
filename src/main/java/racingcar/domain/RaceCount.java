@@ -12,8 +12,8 @@ public class RaceCount {
         this.count = parseAndValidate(input);
     }
 
-    public int getCount() {
-        return count;
+    public boolean hasMoreRound(int currentRound) {
+        return currentRound < count;
     }
 
     private int parseAndValidate(String input) {
