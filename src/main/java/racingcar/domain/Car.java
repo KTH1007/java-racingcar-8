@@ -1,6 +1,7 @@
 package racingcar.domain;
 
 
+import java.util.List;
 import racingcar.domain.exception.ErrorMessage;
 
 public class Car {
@@ -27,8 +28,8 @@ public class Car {
         return name + NAME_POSITION_SEPARATOR + POSITION_SYMBOL.repeat(position);
     }
 
-    public String createNameDisplay() {
-        return name;
+    public void addNameToList(List<String> names) {
+        names.add(name);
     }
 
     public boolean hasHigherPositionThan(Car other) {

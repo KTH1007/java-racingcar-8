@@ -1,6 +1,5 @@
 package racingcar.view;
 
-import java.util.List;
 import racingcar.domain.Cars;
 
 public class OutputView {
@@ -18,8 +17,7 @@ public class OutputView {
     }
 
     public void printRaceProgress(Cars cars) {
-        List<String> progressDisplays = cars.getProgressDisplays();
-        progressDisplays.forEach(System.out::println);
+        cars.displayProgress(System.out::println);
     }
 
     public void printSpace() {
@@ -27,8 +25,9 @@ public class OutputView {
     }
 
     public void printWinners(Cars cars) {
-        List<String> winnerNames = cars.getWinnerNames();
-        String result = String.join(DELIMITER, winnerNames);
-        System.out.println(WINNER_MESSAGE + result);
+        cars.displayWinners(names -> {
+            String result = String.join(DELIMITER, names);
+            System.out.println(WINNER_MESSAGE + result);
+        });
     }
 }
