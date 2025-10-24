@@ -23,7 +23,7 @@ public class RaceCount {
         try {
             parsedCount = Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format(ErrorMessage.NOT_POSITIVE_NUMBER, input.trim()));
+            throw ErrorMessage.invalidNumber(input);
         }
 
         validateRange(parsedCount);
@@ -32,13 +32,13 @@ public class RaceCount {
 
     private static void validateEmpty(String input) {
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_COUNT);
+            throw ErrorMessage.emptyCount();
         }
     }
 
     private static void validateRange(int racingCount) {
         if (racingCount < MIN_COUNT || racingCount > MAX_COUNT) {
-            throw new IllegalArgumentException(String.format(ErrorMessage.INVALID_RACE_COUNT, racingCount));
+            throw ErrorMessage.invalidRaceCount(racingCount);
         }
     }
 }

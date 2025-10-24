@@ -1,10 +1,10 @@
 package racingcar.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.domain.exception.ErrorMessage;
 
 @DisplayName("경주 횟수 도메인 테스트")
 class RaceCountTest {
@@ -15,12 +15,10 @@ class RaceCountTest {
         // given
         String nonNumericInput = "ab";
 
-        // when
-        Throwable thrown = catchThrowable(() -> new RaceCount(nonNumericInput));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("입력값 'ab'는(은) 유효한 숫자가 아닙니다. 양의 정수만 입력해주세요.");
+        // when & then
+        assertThatThrownBy(() -> new RaceCount(nonNumericInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.invalidNumber("ab").getMessage());
     }
 
     @Test
@@ -29,12 +27,10 @@ class RaceCountTest {
         // given
         String nullInput = null;
 
-        // when
-        Throwable thrown = catchThrowable(() -> new RaceCount(nullInput));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("경주 횟수가 비어있습니다.");
+        // when & then
+        assertThatThrownBy(() -> new RaceCount(nullInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.emptyCount().getMessage());
     }
 
     @Test
@@ -43,12 +39,10 @@ class RaceCountTest {
         // given
         String belowMinInput = "0";
 
-        // when
-        Throwable thrown = catchThrowable(() -> new RaceCount(belowMinInput));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("경주 횟수 '0'는(은) 유효하지 않습니다. 1~100 사이여야 합니다.");
+        // when & then
+        assertThatThrownBy(() -> new RaceCount(belowMinInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.invalidRaceCount(0).getMessage());
     }
 
     @Test
@@ -57,12 +51,10 @@ class RaceCountTest {
         // given
         String aboveMaxInput = "101";
 
-        // when
-        Throwable thrown = catchThrowable(() -> new RaceCount(aboveMaxInput));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("경주 횟수 '101'는(은) 유효하지 않습니다. 1~100 사이여야 합니다.");
+        // when & then
+        assertThatThrownBy(() -> new RaceCount(aboveMaxInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.invalidRaceCount(101).getMessage());
     }
 
     @Test
@@ -71,11 +63,9 @@ class RaceCountTest {
         // given
         String emptyInput = "";
 
-        // when
-        Throwable thrown = catchThrowable(() -> new RaceCount(emptyInput));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("경주 횟수가 비어있습니다.");
+        // when & then
+        assertThatThrownBy(() -> new RaceCount(emptyInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.emptyCount().getMessage());
     }
 }

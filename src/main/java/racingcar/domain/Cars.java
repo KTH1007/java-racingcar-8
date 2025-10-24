@@ -42,7 +42,7 @@ public class Cars {
 
     private void validateNotEmpty(List<Car> cars) {
         if (cars == null || cars.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_CAR_LIST);
+            throw ErrorMessage.emptyCarList();
         }
     }
 

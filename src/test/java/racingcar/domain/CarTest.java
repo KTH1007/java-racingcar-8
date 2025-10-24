@@ -1,10 +1,10 @@
 package racingcar.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.domain.exception.ErrorMessage;
 
 @DisplayName("자동차 도메인 테스트")
 class CarTest {
@@ -15,12 +15,9 @@ class CarTest {
         // given
         String longName = "toolongname";
 
-        // when
-        Throwable thrown = catchThrowable(() -> new Car(longName));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("자동차 이름은 5자 이하여야 합니다.");
+        // when & then
+        assertThatThrownBy(() -> new Car(longName)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.nameLengthExceeded().getMessage());
     }
 
     @Test
@@ -29,11 +26,8 @@ class CarTest {
         // given
         String nullName = null;
 
-        // when
-        Throwable thrown = catchThrowable(() -> new Car(nullName));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("자동차 이름이 비어있습니다.");
+        // when & then
+        assertThatThrownBy(() -> new Car(nullName)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.emptyName().getMessage());
     }
 }

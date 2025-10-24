@@ -1,11 +1,11 @@
 package racingcar.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.domain.exception.ErrorMessage;
 
 @DisplayName("자동차 목록 도메인 테스트")
 class CarsTest {
@@ -16,12 +16,10 @@ class CarsTest {
         // given
         List<Car> emptyCarList = List.of();
 
-        // when
-        Throwable thrown = catchThrowable(() -> new Cars(emptyCarList));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("자동차 목록이 비어있습니다.");
+        // when & then
+        assertThatThrownBy(() -> new Cars(emptyCarList))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.emptyCarList().getMessage());
     }
 
     @Test
@@ -30,11 +28,9 @@ class CarsTest {
         // given
         List<Car> nullCarList = null;
 
-        // when
-        Throwable thrown = catchThrowable(() -> new Cars(nullCarList));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("자동차 목록이 비어있습니다.");
+        // when & then
+        assertThatThrownBy(() -> new Cars(nullCarList))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.emptyCarList().getMessage());
     }
 }

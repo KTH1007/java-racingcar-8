@@ -1,7 +1,5 @@
 package racingcar.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +17,7 @@ class NameExtractorTest {
         // when & then
         assertThatThrownBy(() -> NameExtractor.extractCarNames(emptyInput))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.EMPTY_NAME);
+                .hasMessage(ErrorMessage.emptyName().getMessage());
     }
 
     @Test
@@ -28,11 +26,9 @@ class NameExtractorTest {
         // given
         String duplicateInput = "pobi, pobi, woni";
 
-        // when
-        Throwable thrown = catchThrowable(() -> NameExtractor.extractCarNames(duplicateInput));
-
-        // then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
-        assertThat(thrown.getMessage()).isEqualTo("자동차 이름은 중복될 수 없습니다.");
+        // when & then
+        assertThatThrownBy(() -> NameExtractor.extractCarNames(duplicateInput))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.duplicateName().getMessage());
     }
 }

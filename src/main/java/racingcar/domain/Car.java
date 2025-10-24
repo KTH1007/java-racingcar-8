@@ -42,10 +42,10 @@ public class Car {
 
     private void validateName(String name) {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_NAME);
+            throw ErrorMessage.emptyName();
         }
         if (name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException(ErrorMessage.NAME_LENGTH_EXCEEDED);
+            throw ErrorMessage.nameLengthExceeded();
         }
     }
 }

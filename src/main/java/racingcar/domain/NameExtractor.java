@@ -29,22 +29,22 @@ public class NameExtractor {
 
     private static void validateNull(String input) {
         if (input == null || input.trim().isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_NAME);
+            throw ErrorMessage.emptyName();
         }
     }
 
     private static void validateNameList(List<String> names) {
         if (names.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_NAME);
+            throw ErrorMessage.emptyName();
         }
         if (names.size() != new HashSet<>(names).size()) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NAME);
+            throw ErrorMessage.duplicateName();
         }
     }
 
     private static void validateName(String name) {
         if (name.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.EMPTY_NAME);
+            throw ErrorMessage.emptyName();
         }
     }
 }
